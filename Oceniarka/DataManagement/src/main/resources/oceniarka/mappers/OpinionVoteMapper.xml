@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="oceniarka.mappers.OpinionVoteMapper">
+
+    <select id="getFiltered" parameterType="OpinionVoteFilter" resultType="OpinionVote">
+        SELECT
+        *
+        FROM
+        opinion_vote
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="opinionId != null">
+                AND opinionId = #{opinionId}
+            </if>
+            <if test="upDownFrom != null">
+                AND upDown &gt;= #{upDownFrom}
+            </if>
+            <if test="upDownTo != null">
+                AND upDown &lt;= #{upDownTo}
+            </if>
+            <if test="addDateFrom != null">
+                AND addDate &gt;= #{addDateFrom}
+            </if>
+            <if test="addDateTo != null">
+                AND addDate &lt;= #{addDateTo}
+            </if>
+        </where>
+    </select>
+
+    <insert id="add" parameterType="OpinionVote">
+        INSERT INTO opinion_vote (opinionId, upDown, addDate) VALUES (#{opinionId}, #{upDown}, #{addDate})
+    </insert>
+
+    <update id="update" parameterType="OpinionVote">
+        UPDATE opinion_vote
+        <set>
+            <if test="opinionId != null">opinionId = #{opinionId},</if>
+            <if test="upDown != null">upDown = #{upDown},</if>
+            <if test="addDate != null">addDate = #{addDate},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM opinion_vote
+        WHERE id = #{id};
+    </delete>
+
+    <select id="selectNLastRecords" parameterType="Integer" resultType="OpinionVote">
+        SELECT
+        *
+        FROM opinion_vote
+        ORDER BY id DESC
+        LIMIT #{number}
+    </select>
+
+</mapper>

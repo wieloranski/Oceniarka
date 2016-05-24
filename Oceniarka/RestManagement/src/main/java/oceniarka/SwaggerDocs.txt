@@ -1,0 +1,1139 @@
+{
+
+    "swagger": "2.0",
+    "info": 
+
+{
+
+    "description": "Oceniarka API",
+    "version": "1.0",
+    "title": "Oceniarka API",
+    "contact": 
+
+    {
+        "name": "rafal@pydyniak.pl"
+    },
+    "license": { }
+
+},
+"host": "localhost:8080",
+"basePath": "/",
+"tags": 
+[
+
+{
+
+    "name": "products-controller",
+    "description": "Products Controller"
+
+},
+{
+
+    "name": "opinion-votes-controller",
+    "description": "Opinion Votes Controller"
+
+},
+{
+
+    "name": "categories-controller",
+    "description": "Categories Controller"
+
+},
+
+    {
+        "name": "opinions-controller",
+        "description": "Opinions Controller"
+    }
+
+],
+"paths": 
+{
+
+    "/api/categories": 
+
+{
+
+    "get": 
+
+{
+
+    "tags": 
+
+[
+
+    "categories-controller"
+
+],
+"summary": "getCategories",
+"operationId": "getCategoriesUsingGET",
+"consumes": 
+[
+
+    "application/json"
+
+],
+"produces": 
+[
+
+    "application/json"
+
+],
+"responses": 
+{
+
+    "200": 
+
+{
+
+    "description": "OK",
+    "schema": 
+
+{
+
+    "type": "array",
+    "items": 
+
+        {
+            "$ref": "#/definitions/Category"
+        }
+    }
+
+},
+"401": 
+{
+
+    "description": "Unauthorized"
+
+},
+"403": 
+{
+
+    "description": "Forbidden"
+
+},
+"404": 
+
+        {
+            "description": "Not Found"
+        }
+    }
+
+},
+"post": 
+{
+
+    "tags": 
+
+[
+
+    "categories-controller"
+
+],
+"summary": "addCategory",
+"operationId": "addCategoryUsingPOST",
+"consumes": 
+[
+
+    "application/json"
+
+],
+"produces": 
+[
+
+    "application/json"
+
+],
+"parameters": 
+[
+
+{
+
+    "in": "body",
+    "name": "category",
+    "description": "category",
+    "required": true,
+    "schema": 
+
+        {
+            "$ref": "#/definitions/Category"
+        }
+    }
+
+],
+"responses": 
+{
+
+    "200": 
+
+{
+
+    "description": "OK",
+    "schema": 
+
+    {
+        "$ref": "#/definitions/Category"
+    }
+
+},
+"201": 
+{
+
+    "description": "Created"
+
+},
+"401": 
+{
+
+    "description": "Unauthorized"
+
+},
+"403": 
+{
+
+    "description": "Forbidden"
+
+},
+"404": 
+
+            {
+                "description": "Not Found"
+            }
+        }
+    }
+
+},
+"/api/categories/{id}": 
+{
+
+    "get": 
+
+{
+
+    "tags": 
+
+[
+
+    "categories-controller"
+
+],
+"summary": "getCategoryById",
+"operationId": "getCategoryByIdUsingGET",
+"consumes": 
+[
+
+    "application/json"
+
+],
+"produces": 
+[
+
+    "application/json"
+
+],
+"parameters": 
+[
+
+    {
+        "name": "id",
+        "in": "path",
+        "description": "id",
+        "required": true,
+        "type": "integer",
+        "format": "int32"
+    }
+
+],
+"responses": 
+{
+
+    "200": 
+
+{
+
+    "description": "OK",
+    "schema": 
+
+    {
+        "$ref": "#/definitions/Category"
+    }
+
+},
+"401": 
+{
+
+    "description": "Unauthorized"
+
+},
+"403": 
+{
+
+    "description": "Forbidden"
+
+},
+"404": 
+
+            {
+                "description": "Not Found"
+            }
+        }
+    }
+
+},
+"/api/opinionVotes": 
+{
+
+    "get": 
+
+{
+
+    "tags": 
+
+[
+
+    "opinion-votes-controller"
+
+],
+"summary": "getOpinionVotes",
+"operationId": "getOpinionVotesUsingGET",
+"consumes": 
+[
+
+    "application/json"
+
+],
+"produces": 
+[
+
+    "application/json"
+
+],
+"responses": 
+{
+
+    "200": 
+
+{
+
+    "description": "OK",
+    "schema": 
+
+{
+
+    "type": "array",
+    "items": 
+
+        {
+            "$ref": "#/definitions/OpinionVote"
+        }
+    }
+
+},
+"401": 
+{
+
+    "description": "Unauthorized"
+
+},
+"403": 
+{
+
+    "description": "Forbidden"
+
+},
+"404": 
+
+        {
+            "description": "Not Found"
+        }
+    }
+
+},
+"post": 
+{
+
+    "tags": 
+
+[
+
+    "opinion-votes-controller"
+
+],
+"summary": "addOpinionVote",
+"operationId": "addOpinionVoteUsingPOST",
+"consumes": 
+[
+
+    "application/json"
+
+],
+"produces": 
+[
+
+    "application/json"
+
+],
+"parameters": 
+[
+
+{
+
+    "in": "body",
+    "name": "OpinionVote",
+    "description": "OpinionVote",
+    "required": true,
+    "schema": 
+
+        {
+            "$ref": "#/definitions/OpinionVote"
+        }
+    }
+
+],
+"responses": 
+{
+
+    "200": 
+
+{
+
+    "description": "OK",
+    "schema": 
+
+    {
+        "$ref": "#/definitions/OpinionVote"
+    }
+
+},
+"201": 
+{
+
+    "description": "Created"
+
+},
+"401": 
+{
+
+    "description": "Unauthorized"
+
+},
+"403": 
+{
+
+    "description": "Forbidden"
+
+},
+"404": 
+
+            {
+                "description": "Not Found"
+            }
+        }
+    }
+
+},
+"/api/opinionVotes/{id}": 
+{
+
+    "get": 
+
+{
+
+    "tags": 
+
+[
+
+    "opinion-votes-controller"
+
+],
+"summary": "getOpinionVoteById",
+"operationId": "getOpinionVoteByIdUsingGET",
+"consumes": 
+[
+
+    "application/json"
+
+],
+"produces": 
+[
+
+    "application/json"
+
+],
+"parameters": 
+[
+
+    {
+        "name": "id",
+        "in": "path",
+        "description": "id",
+        "required": true,
+        "type": "integer",
+        "format": "int32"
+    }
+
+],
+"responses": 
+{
+
+    "200": 
+
+{
+
+    "description": "OK",
+    "schema": 
+
+    {
+        "$ref": "#/definitions/OpinionVote"
+    }
+
+},
+"401": 
+{
+
+    "description": "Unauthorized"
+
+},
+"403": 
+{
+
+    "description": "Forbidden"
+
+},
+"404": 
+
+            {
+                "description": "Not Found"
+            }
+        }
+    }
+
+},
+"/api/opinions": 
+{
+
+    "get": 
+
+{
+
+    "tags": 
+
+[
+
+    "opinions-controller"
+
+],
+"summary": "getopinions",
+"operationId": "getopinionsUsingGET",
+"consumes": 
+[
+
+    "application/json"
+
+],
+"produces": 
+[
+
+    "application/json"
+
+],
+"responses": 
+{
+
+    "200": 
+
+{
+
+    "description": "OK",
+    "schema": 
+
+{
+
+    "type": "array",
+    "items": 
+
+        {
+            "$ref": "#/definitions/Opinion"
+        }
+    }
+
+},
+"401": 
+{
+
+    "description": "Unauthorized"
+
+},
+"403": 
+{
+
+    "description": "Forbidden"
+
+},
+"404": 
+
+        {
+            "description": "Not Found"
+        }
+    }
+
+},
+"post": 
+{
+
+    "tags": 
+
+[
+
+    "opinions-controller"
+
+],
+"summary": "addOpinion",
+"operationId": "addOpinionUsingPOST",
+"consumes": 
+[
+
+    "application/json"
+
+],
+"produces": 
+[
+
+    "application/json"
+
+],
+"parameters": 
+[
+
+{
+
+    "in": "body",
+    "name": "Opinion",
+    "description": "Opinion",
+    "required": true,
+    "schema": 
+
+        {
+            "$ref": "#/definitions/Opinion"
+        }
+    }
+
+],
+"responses": 
+{
+
+    "200": 
+
+{
+
+    "description": "OK",
+    "schema": 
+
+    {
+        "$ref": "#/definitions/Opinion"
+    }
+
+},
+"201": 
+{
+
+    "description": "Created"
+
+},
+"401": 
+{
+
+    "description": "Unauthorized"
+
+},
+"403": 
+{
+
+    "description": "Forbidden"
+
+},
+"404": 
+
+            {
+                "description": "Not Found"
+            }
+        }
+    }
+
+},
+"/api/opinions/{id}": 
+{
+
+    "get": 
+
+{
+
+    "tags": 
+
+[
+
+    "opinions-controller"
+
+],
+"summary": "getOpinionById",
+"operationId": "getOpinionByIdUsingGET",
+"consumes": 
+[
+
+    "application/json"
+
+],
+"produces": 
+[
+
+    "application/json"
+
+],
+"parameters": 
+[
+
+    {
+        "name": "id",
+        "in": "path",
+        "description": "id",
+        "required": true,
+        "type": "integer",
+        "format": "int32"
+    }
+
+],
+"responses": 
+{
+
+    "200": 
+
+{
+
+    "description": "OK",
+    "schema": 
+
+    {
+        "$ref": "#/definitions/Opinion"
+    }
+
+},
+"401": 
+{
+
+    "description": "Unauthorized"
+
+},
+"403": 
+{
+
+    "description": "Forbidden"
+
+},
+"404": 
+
+            {
+                "description": "Not Found"
+            }
+        }
+    }
+
+},
+"/api/products": 
+{
+
+    "get": 
+
+{
+
+    "tags": 
+
+[
+
+    "products-controller"
+
+],
+"summary": "getProducts",
+"operationId": "getProductsUsingGET",
+"consumes": 
+[
+
+    "application/json"
+
+],
+"produces": 
+[
+
+    "application/json"
+
+],
+"responses": 
+{
+
+    "200": 
+
+{
+
+    "description": "OK",
+    "schema": 
+
+{
+
+    "type": "array",
+    "items": 
+
+        {
+            "$ref": "#/definitions/Product"
+        }
+    }
+
+},
+"401": 
+{
+
+    "description": "Unauthorized"
+
+},
+"403": 
+{
+
+    "description": "Forbidden"
+
+},
+"404": 
+
+        {
+            "description": "Not Found"
+        }
+    }
+
+},
+"post": 
+{
+
+    "tags": 
+
+[
+
+    "products-controller"
+
+],
+"summary": "addProduct",
+"operationId": "addProductUsingPOST",
+"consumes": 
+[
+
+    "application/json"
+
+],
+"produces": 
+[
+
+    "application/json"
+
+],
+"parameters": 
+[
+
+{
+
+    "in": "body",
+    "name": "Product",
+    "description": "Product",
+    "required": true,
+    "schema": 
+
+        {
+            "$ref": "#/definitions/Product"
+        }
+    }
+
+],
+"responses": 
+{
+
+    "200": 
+
+{
+
+    "description": "OK",
+    "schema": 
+
+    {
+        "$ref": "#/definitions/Product"
+    }
+
+},
+"201": 
+{
+
+    "description": "Created"
+
+},
+"401": 
+{
+
+    "description": "Unauthorized"
+
+},
+"403": 
+{
+
+    "description": "Forbidden"
+
+},
+"404": 
+
+            {
+                "description": "Not Found"
+            }
+        }
+    }
+
+},
+"/api/products/{id}": 
+{
+
+    "get": 
+
+{
+
+    "tags": 
+
+[
+
+    "products-controller"
+
+],
+"summary": "getProductById",
+"operationId": "getProductByIdUsingGET",
+"consumes": 
+[
+
+    "application/json"
+
+],
+"produces": 
+[
+
+    "application/json"
+
+],
+"parameters": 
+[
+
+    {
+        "name": "id",
+        "in": "path",
+        "description": "id",
+        "required": true,
+        "type": "integer",
+        "format": "int32"
+    }
+
+],
+"responses": 
+{
+
+    "200": 
+
+{
+
+    "description": "OK",
+    "schema": 
+
+    {
+        "$ref": "#/definitions/Product"
+    }
+
+},
+"401": 
+{
+
+    "description": "Unauthorized"
+
+},
+"403": 
+{
+
+    "description": "Forbidden"
+
+},
+"404": 
+
+                {
+                    "description": "Not Found"
+                }
+            }
+        }
+    }
+
+},
+"definitions": 
+{
+
+    "Category": 
+
+{
+
+    "properties": 
+
+{
+
+    "idcategory": 
+
+{
+
+    "type": "integer",
+    "format": "int64"
+
+},
+"l": 
+{
+
+    "type": "integer",
+    "format": "int64"
+
+},
+"name": 
+{
+
+    "type": "string"
+
+},
+"r": 
+
+        {
+            "type": "integer",
+            "format": "int64"
+        }
+    }
+
+},
+"Opinion": 
+{
+
+    "properties": 
+
+{
+
+    "addDate":
+
+{
+
+    "type": "string",
+    "format": "date-time"
+
+},
+"downVotes": 
+{
+
+    "type": "integer",
+    "format": "int32"
+
+},
+"opinionId":
+{
+
+    "type": "integer",
+    "format": "int64"
+
+},
+"productId":
+{
+
+    "type": "integer",
+    "format": "int64"
+
+},
+"userId":
+{
+
+    "type": "integer",
+    "format": "int64"
+
+},
+"rating": 
+{
+
+    "type": "integer",
+    "format": "int32"
+
+},
+"upVotes": 
+
+        {
+            "type": "integer",
+            "format": "int32"
+        }
+    }
+
+},
+"Product": 
+{
+
+    "properties": 
+
+{
+
+    "idCategory": 
+
+{
+
+    "type": "integer",
+    "format": "int64"
+
+},
+"productId":
+{
+
+    "type": "integer",
+    "format": "int64"
+
+},
+"productName": 
+{
+
+    "type": "string"
+
+},
+"productRating": 
+
+        {
+            "type": "integer",
+            "format": "int32"
+        }
+    }
+
+},
+"OpinionVote": 
+{
+
+    "properties": 
+
+{
+
+    "opinionId":
+
+{
+
+    "type": "integer",
+    "format": "int64"
+
+},
+"userId":
+{
+
+    "type": "integer",
+    "format": "int64"
+
+},
+"updow": 
+
+                {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        }
+    }
+
+}

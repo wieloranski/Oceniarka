@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="useGeneratedKeys" value="false"/>
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="defaultStatementTimeout" value="25"/>
+        <setting name="safeRowBoundsEnabled" value="false"/>
+        <setting name="mapUnderscoreToCamelCase" value="false"/>
+        <setting name="localCacheScope" value="SESSION"/>
+        <setting name="jdbcTypeForNull" value="OTHER"/>
+        <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="Category" type="oceniarka.Domain.Category"/>
+        <typeAlias alias="Opinion" type="oceniarka.Domain.Opinion"/>
+        <typeAlias alias="OpinionVote" type="oceniarka.Domain.OpinionVote"/>
+        <typeAlias alias="Product" type="oceniarka.Domain.Product"/>
+        <typeAlias alias="User" type="oceniarka.Domain.User"/>
+        <typeAlias alias="Authority" type="oceniarka.Domain.Authority"/>
+        <typeAlias alias="CategoryFilter" type="oceniarka.Filters.CategoryFilter"/>
+        <typeAlias alias="OpinionFilter" type="oceniarka.Filters.OpinionFilter"/>
+        <typeAlias alias="OpinionVoteFilter" type="oceniarka.Filters.OpinionVoteFilter"/>
+        <typeAlias alias="ProductFilter" type="oceniarka.Filters.ProductFilter"/>
+    </typeAliases>
+
+
+</configuration>

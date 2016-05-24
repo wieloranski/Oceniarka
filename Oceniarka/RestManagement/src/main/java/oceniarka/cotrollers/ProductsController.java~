@@ -1,0 +1,73 @@
+package oceniarka.cotrollers;
+
+
+import oceniarka.Domain.Product;
+import oceniarka.Filters.ProductFilter;
+import oceniarka.management.ProductMgmt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * Created by rafal on 01.11.15.
+ */
+@RestController
+@RequestMapping("/api/products")
+public class ProductsController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProductsController.class);
+
+    private static ControllerHelper<Product> controllerHelper;
+
+    @Resource
+    ProductMgmt productMgmt;
+
+    @PostConstruct
+    private void buildHelper() {
+        controllerHelper = new ControllerHelper<>(productMgmt, logger, "produkty");
+    }
+
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<Product>> getProducts() {
+        return new ResponseEntity<>(productMgmt.getAll(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<Product> getProductById(@PathVariable int id) {
+        return new ResponseEntity<>(productMgmt.getById(id), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/filtered", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<Product>> getOpinionsFiltered(@RequestBody ProductFilter productFilter) {
+        return new ResponseEntity<>(productMgmt.getFiltered(productFilter), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity addProduct(@RequestBody Product product) {
+        return controllerHelper.add(product);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity deleteProduct(@PathVariable int id) {
+        return controllerHelper.delete(id);
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity updateCategory(@PathVariable int id, @RequestBody Product product) {
+        return controllerHelper.update(product, id);
+    }
+
+}

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="oceniarka.mappers.OpinionMapper">
+
+    <select id="getFiltered" parameterType="OpinionFilter" resultType="Opinion">
+        SELECT
+        *
+        FROM
+        opinion
+        <where>
+            <if test="id != null">
+                AND id = #{id};
+            </if>
+            <if test="userId != null">
+                AND userId = #{userId}
+            </if>
+            <if test="productId != null">
+                AND productId = #{productId}
+            </if>
+            <if test="ratingFrom != null">
+                AND rating &gt;= #{ratingFrom}
+            </if>
+            <if test="ratingTo != null">
+                AND rating &lt;= #{ratingTo}
+            </if>
+            <if test="upVotesFrom != null">
+                AND upVotes &gt;= #{upVotesFrom}
+            </if>
+            <if test="upVotesTo != null">
+                AND upVotes &lt;= #{upVotesTo}
+            </if>
+            <if test="downVotesFrom != null">
+                AND downVotes &gt;= #{downVotesFrom}
+            </if>
+            <if test="downVotesTo != null">
+                AND downVotes &lt;= #{downVotesTo}
+            </if>
+            <if test="dateAddFrom != null">
+                AND addDate &gt;= #{dateAddFrom}
+            </if>
+            <if test="dateAddTo != null">
+                AND addDate &lt;= #{dateAddTo}
+            </if>
+        </where>
+    </select>
+
+    <insert id="add" parameterType="Opinion">
+        INSERT INTO opinion (
+        <if test="rating != null">
+            rating,
+        </if>
+        <if test="upVotes != null">
+            upVotes,
+        </if>
+        <if test="downVotes != null">
+            downVotes,
+        </if>
+        productId,
+        userId,
+        addDate
+        ) VALUES (
+        <if test="rating != null">
+            #{rating},
+        </if>
+        <if test="upVotes != null">
+            #{upVotes},
+        </if>
+        <if test="downVotes != null">
+            #{downVotes},
+        </if>
+        #{productId},
+        #{userId},
+        #{addDate}
+        );
+    </insert>
+
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM opinion
+        WHERE id = #{id};
+    </delete>
+
+    <select id="selectNLastRecords" parameterType="Integer" resultType="Opinion">
+        SELECT
+        *
+        FROM opinion
+        ORDER BY id DESC
+        LIMIT #{number}
+    </select>
+
+    <update id="update" parameterType="Opinion">
+        UPDATE opinion
+        <set>
+            <if test="productId != null">productId = #{productId},</if>
+            <if test="userId != null">userId = #{userId},</if>
+            <if test="rating != null">rating = #{rating},</if>
+            <if test="upVotes != null">upVotes = #{upVotes},</if>
+            <if test="downVotes != null">downVotes = #{downVotes},</if>
+            <if test="addDate != null">addDate = #{addDate},</if>
+            <if test="comment != null">comment = #{comment},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

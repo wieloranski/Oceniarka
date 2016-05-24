@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="oceniarka.mappers.UserMapper">
+
+    <select id="getAllUsers" resultType="User">
+        SELECT
+        *
+        FROM
+        user;
+    </select>
+
+    <insert id="addUser" parameterType="User">
+        INSERT INTO user (username, password, createtime, lastseentime, enabled, deleted) values
+        (#{username}, #{password}, #{createTime}, #{lastSeenTime}, #{enabled}, #{deleted})
+    </insert>
+
+    <insert id="addAuthority" parameterType="Authority">
+        INSERT INTO authority(username, authority) values(#{username}, #{authority})
+    </insert>
+
+    <select id="findUserByUsername" parameterType="String" resultType="User">
+        select
+        *
+        from
+        user
+        where
+        username = #{username}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,84 @@
+package oceniarka.cotrollers;
+
+import oceniarka.Domain.Opinion;
+import oceniarka.Domain.OpinionVote;
+import oceniarka.Filters.OpinionVoteFilter;
+import oceniarka.management.OpinionVotesMgmt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * Created by nikodem on 01.11.15.
+ */
+@RestController
+@RequestMapping("/api/opinionVotes")
+public class OpinionVotesController {
+
+    private static final Logger logger = LoggerFactory.getLogger(OpinionVotesController.class);
+
+    @Resource
+    OpinionVotesMgmt opinionVotesMgmt;
+
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<OpinionVote>> getOpinionVotes() {
+        return new ResponseEntity<>(opinionVotesMgmt.getAll(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<OpinionVote> getOpinionVoteById(@PathVariable int id) {
+        return new ResponseEntity(opinionVotesMgmt.getById(id), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/filtered", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<OpinionVote>> getOpinionVotesFiltered(@RequestBody OpinionVoteFilter opinionVoteFilter) {
+        return new ResponseEntity<>(opinionVotesMgmt.getFiltered(opinionVoteFilter), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity addOpinionVote(@RequestBody OpinionVote OpinionVote) {
+        logger.info("Dodano kategorie");
+        if (OpinionVote != null) {
+            opinionVotesMgmt.add(OpinionVote);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<Opinion> deleteOpinionVoteById(@PathVariable int id) {
+        if (opinionVotesMgmt.getById(id) != null) {
+            opinionVotesMgmt.delete(id);
+            logger.info("Usunieto głos opinii");
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<OpinionVote> updateOpinionVotes(@PathVariable int id, @RequestBody OpinionVote opinionVote) {
+        if (opinionVotesMgmt.getById(id) != null) {
+            opinionVote.setId(id);
+            opinionVotesMgmt.update(opinionVote);
+            logger.info("Zmieniono głos opinii");
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+
+}
+
+
